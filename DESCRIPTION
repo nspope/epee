@@ -1,0 +1,21 @@
+Package: epee
+Type: Package
+Title: Expectation-propagation for the phylogenetic threshold model
+Version: 0.0.0.9000
+Date: 2017-01-09
+Authors@R: c(person("Nathaniel", "Pope", email = "nspope@utexas.edu", role = c("aut", "cre")),
+    person("Eric", "Goolsby", role = c("aut")))
+Description: Approximate, maximum likelihood based inference for phylogenetic
+    threshold models using expectation propagation. Blah blah.
+Depends: R (>= 3.3.2)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: Rcpp (>= 0.12.8), ape, phangorn
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 5.0.1
+NeedsCompilation: yes
+Packaged: 2017-05-07 22:39:54 UTC; nathaniel
+Author: Nathaniel Pope [aut, cre],
+  Eric Goolsby [aut]
+Maintainer: Nathaniel Pope <nspope@utexas.edu>
