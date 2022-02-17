@@ -6,19 +6,15 @@
 
 using namespace Rcpp;
 
-// do_test
-void do_test(arma::mat lambda, arma::mat sigma, arma::mat Z, arma::umat E, arma::vec L, arma::vec H, arma::uvec ind);
-RcppExport SEXP epee_do_test(SEXP lambdaSEXP, SEXP sigmaSEXP, SEXP ZSEXP, SEXP ESEXP, SEXP LSEXP, SEXP HSEXP, SEXP indSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type lambda(lambdaSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type sigma(sigmaSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< arma::umat >::type E(ESEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type L(LSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type H(HSEXP);
-    Rcpp::traits::input_parameter< arma::uvec >::type ind(indSEXP);
-    do_test(lambda, sigma, Z, E, L, H, ind);
-    return R_NilValue;
-END_RCPP
+
+RcppExport SEXP _rcpp_module_boot_epee();
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_rcpp_module_boot_epee", (DL_FUNC) &_rcpp_module_boot_epee, 0},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_epee2(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
