@@ -565,17 +565,22 @@ test_likelihood_deriv <- function(seed=1, n=5, mx=3, mz=2, ncov=0, tol=0, missin
   return(list(ep_ans, list(ch_ans_ll, ch_ans_ss, ch_ans_be), constraints_L, constraints_S))#ok but signs are off on be
 }
 
-sucks <- function(seed=1,n=10,l=0, b=0, nlm=FALSE)
+testcase_mixed <- function(seed=1, n=10, l=0, b=0, nlm=FALSE)
 {
   if (nlm)
     optimiz = "nlm"
   else
     optimiz = "Nelder-Mead"
-  hi <- random_data(seed=seed,n=n, mz=1, mx=2, l=l, b=b)
-  epee(list(cat1~1,cat2~1,cont1~1), data=hi$df, tree=hi$tree, optimizer=optimiz, 
-       constraints_within=list(c("cat1","cat2","cont1")),
-       constraints_between=list(c("cat1","cat2","cont1")), hessian=TRUE)
-#  epee(list(cont1~1), data=hi$df, tree=hi$tree, optimizer=optimiz, hessian=TRUE)
-       #constraints_within=list(c("cat1","cat2","cont1")),
-       #constraints_between=list(c("cat1","cat2","cont1")), hessian=TRUE)
+
+  # simulate combined continuous/categorical traits
+  mixed_data <- random_data(seed=seed,n=n, mz=1, mx=2, l=l, b=b)
+
+  # usage
+  epee(list(cat1~1,cat2~1,cont1~1), # regression formulas for 3 traits
+       data=mixed_data$df,          # trait data
+       tree=mixed_data$tree,        # phylogenetic tree
+       optimizer=optimiz,           # choice of optimizer
+       constraints_within=list(c("cat1","cat2","cont1")),  # force diagonal covariance
+       constraints_between=list(c("cat1","cat2","cont1")), # force diagonal covariance
+       hessian=TRUE)
 }
